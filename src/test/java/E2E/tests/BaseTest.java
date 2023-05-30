@@ -1,54 +1,23 @@
-package tests;
+package E2E.tests;
 
-import com.github.javafaker.Faker;
-import io.restassured.RestAssured;
-import io.restassured.builder.RequestSpecBuilder;
-import io.restassured.http.ContentType;
-import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
+import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
+import org.junit.Before;
 
 public class BaseTest{
 
-    Faker faker = new Faker();
-    Response response;
-    final static String BASE_URI = "https://studio-api.softr.io/v1/api";
-    final static String API_KEY = "khIbAyJIU5CIuh1oDuBRx1s49";
-    final static String DOMAIN = "jere237.softr.app";
-
-     static RequestSpecification specification = new RequestSpecBuilder() {
-    }
-            .setUrlEncodingEnabled(false)
-            .setBaseUri(BASE_URI)
-            .setContentType(ContentType.JSON)
-            .addHeader("Softr-Api-Key", API_KEY)
-            .addHeader("Softr-Domain", DOMAIN)
-            .build();
 
 
-    public Response postRequest(String endPoint, Integer responseCode, Object body) {
-        Response response = RestAssured.given()
-                .spec(specification)
-                .body(body)
-                .when()
-                .log().all()
-                .post(endPoint)
-                .then().log().all()
-                .extract().response();
-        response.then().assertThat().statusCode(responseCode);
-        return response;
+    final static String BASE_URI = "https://jere237.softr.app/";
+     @Before
+    public void setUp(){
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
+        Configuration.browserSize = "1920x1080";
+        Selenide.open(BASE_URI);
+
     }
 
 
-    public Response deleteRequest(String endPoint, Integer responseCode) {
-
-        Response response = RestAssured.given()
-                .spec(specification)
-                .when()
-                .log().all()
-                .delete(endPoint)
-                .then().log().all()
-                .extract().response();
-        response.then().assertThat().statusCode(responseCode);
-        return response;
-    }
 }

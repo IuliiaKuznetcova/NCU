@@ -5,6 +5,7 @@ import E2E.pages.gast.HederPage;
 import E2E.pages.student.StudentDetailsPage;
 import E2E.pages.student.StudentHomePage;
 import E2E.pages.student.StudetnDirectoryPage;
+import E2E.tests.CheckForApi;
 import com.codeborne.selenide.Selenide;
 import com.github.javafaker.Faker;
 import api.dto.ValidUserCredentials;
@@ -100,9 +101,9 @@ public class CreateUserTestApiBase extends ApiBase {
         hederPage.clickStudentDirectoryButton();
         studetnDirectoryPage.displayWelcomeTextOnStudentPage();
         studetnDirectoryPage.fillFieldSearch(fullName);
-        //studetnDirectoryPage.searchResultDisplayRandomData();
+        studetnDirectoryPage.searchResultDisplayRandomData(fullName);
         studetnDirectoryPage.viewProfileButton();
-        studentDetailsPage.displayStudenFullName();
+        studentDetailsPage.displayStudenFullNameRandomData(fullName);
         studentHomePage.signOutStudent();
     }
 

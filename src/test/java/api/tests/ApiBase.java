@@ -1,4 +1,4 @@
-package api;
+package api.tests;
 
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
@@ -11,16 +11,10 @@ import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 public class ApiBase {
 
-
-    final static String BASE_URI = "https://studio-api.softr.io/v1/api";
+    final static String BASE_URI_API = "https://studio-api.softr.io/v1/api";
     final static String API_KEY = "khIbAyJIU5CIuh1oDuBRx1s49";
     final static String DOMAIN = "jere237.softr.app";
 
-   /* @Before
-    public void setUp(){
-        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
-        open(BASE_URI);
-    }*/
     @After
     public void tearDown(){
         closeWebDriver();
@@ -28,7 +22,7 @@ public class ApiBase {
     static RequestSpecification specification = new RequestSpecBuilder() {
     }
             .setUrlEncodingEnabled(false)
-            .setBaseUri(BASE_URI)
+            .setBaseUri(BASE_URI_API)
             .setContentType(ContentType.JSON)
             .addHeader("Softr-Api-Key", API_KEY)
             .addHeader("Softr-Domain", DOMAIN)
