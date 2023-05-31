@@ -5,13 +5,14 @@ import E2E.pages.gast.HederPage;
 import E2E.pages.student.StudentDetailsPage;
 import E2E.pages.student.StudentHomePage;
 import E2E.pages.student.StudetnDirectoryPage;
-import E2E.tests.CheckForApi;
 import com.codeborne.selenide.Selenide;
 import com.github.javafaker.Faker;
 import api.dto.ValidUserCredentials;
 import io.restassured.response.Response;
+
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-import org.testng.annotations.AfterMethod;
+
 
 public class CreateUserTestApiBase extends ApiBase {
     String endpoint = "/users";
@@ -20,6 +21,12 @@ public class CreateUserTestApiBase extends ApiBase {
     String email = faker.internet().emailAddress();
 
     final static String BASE_URI = "https://jere237.softr.app/";
+
+/*    @AfterEach
+    public void afterTest() {
+        deleteRequest(endpoint + email, 200);
+    }*/
+
 
     @Test
     public void successfulCreateUserWithExactData() {
@@ -46,10 +53,6 @@ public class CreateUserTestApiBase extends ApiBase {
         Response response = postRequest(endpoint, 201, requestBody);
     }
 
-    @AfterMethod
-    public void afterTest() {
-        deleteRequest(endpoint + email, 200);
-    }
 
     @Test
     public void successfulCreateUserApiAndUi() {
@@ -66,10 +69,11 @@ public class CreateUserTestApiBase extends ApiBase {
         Response response = postRequest(endpoint, 201, requestBody);
         Selenide.open(BASE_URI);
         signInPage.clickSignInButton();
-        signInPage.displayRegistrationForm();
+        signInPage.loginAction(email, "777555");
+      /*  signInPage.displayRegistrationForm();
         signInPage.enterEmail(email);
         signInPage.enterPassword("777555");
-        signInPage.clickSignInButtonInRegistrForm();
+        signInPage.clickSignInButtonInRegistrForm();*/
         //hederPage.displayStudentDirectoryButton();
         //при входе с данными созданного юзера у него не отображается хедер, поэтому проверка по Student Directory не работает
         //заменила на проверку по видимому тексту "Professor spotlight"
@@ -104,7 +108,7 @@ public class CreateUserTestApiBase extends ApiBase {
         studetnDirectoryPage.searchResultDisplayRandomData(fullName);
         studetnDirectoryPage.viewProfileButton();
         studentDetailsPage.displayStudenFullNameRandomData(fullName);
-        studentHomePage.signOutStudent();
+        studentHomePage.checkSignOutStudent();
     }
 
 }

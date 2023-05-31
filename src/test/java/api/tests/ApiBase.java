@@ -5,7 +5,8 @@ import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import org.junit.After;
+import org.junit.jupiter.api.AfterEach;
+
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
@@ -15,7 +16,7 @@ public class ApiBase {
     final static String API_KEY = "khIbAyJIU5CIuh1oDuBRx1s49";
     final static String DOMAIN = "jere237.softr.app";
 
-    @After
+    @AfterEach
     public void tearDown(){
         closeWebDriver();
     }

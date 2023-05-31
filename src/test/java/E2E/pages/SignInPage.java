@@ -27,6 +27,7 @@ public class SignInPage {
     }
 
     public void enterPassword(String passwordValue){
+
         passwordField.setValue(passwordValue);
     }
 
@@ -35,6 +36,12 @@ public class SignInPage {
         signInButtonInRegistrForm.shouldBe(visible, Duration.ofSeconds(10));
     }
 
-
+    public void loginAction (String emailValue, String passwordValue) {
+        emailField.shouldBe(visible, Duration.ofSeconds(10));
+        emailField.setValue(emailValue);
+        passwordField.setValue(passwordValue);
+        signInButtonInRegistrForm.click();
+        signInButtonInRegistrForm.shouldBe(visible, Duration.ofSeconds(10));
+    }
 
 }

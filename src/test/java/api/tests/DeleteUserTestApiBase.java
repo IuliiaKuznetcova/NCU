@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 public class DeleteUserTestApiBase extends ApiBase {
     String endpoint = "/users/";
-    String email = "glennie.prohaska@gmail.com";
+    String email = "michale.bosco@yahoo.com";
     @Test
     public void successDelete(){
 
