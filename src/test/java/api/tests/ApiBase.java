@@ -5,9 +5,11 @@ import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import org.junit.After;
+import org.testng.annotations.AfterMethod;
+
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
+
 
 public class ApiBase {
 
@@ -15,7 +17,7 @@ public class ApiBase {
     final static String API_KEY = "khIbAyJIU5CIuh1oDuBRx1s49";
     final static String DOMAIN = "jere237.softr.app";
 
-    @After
+    @AfterMethod
     public void tearDown(){
         closeWebDriver();
     }

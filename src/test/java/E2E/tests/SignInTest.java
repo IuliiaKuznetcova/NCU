@@ -2,10 +2,8 @@ package E2E.tests;
 
 import E2E.pages.*;
 import E2E.pages.gast.HederPage;
-import E2E.pages.student.StudentDetailsPage;
-import E2E.pages.student.StudentHomePage;
-import E2E.pages.student.StudetnDirectoryPage;
-import org.junit.Test;
+import E2E.pages.student.*;
+import org.testng.annotations.Test;
 
 public class SignInTest extends BaseTest {
     SignInPage signInPage = new SignInPage();
@@ -13,16 +11,34 @@ public class SignInTest extends BaseTest {
     StudetnDirectoryPage studentDirectoryPage = new StudetnDirectoryPage();
     StudentDetailsPage studentDetailsPage = new StudentDetailsPage();
     StudentHomePage studentHomePage = new StudentHomePage();
+    StudetnDirectoryPage studetnDirectoryPage = new StudetnDirectoryPage();
+    StudentCourseList studentCourseList = new StudentCourseList();
+    StudentGrowthMarketingCourseDetails studentGrowthMarketingCourseDetails = new StudentGrowthMarketingCourseDetails();
+    @Test
+    public void visibilityOfDocumentsSharingOnStudentPage () {
+
+        signInPage.clickSignInButton();
+        signInPage.displayRegistrationForm();
+        signInPage.loginAction("malik@example.com","123456");
+        hederPage.displayStudentDirectoryButton();
+        hederPage.clickStudentDirectoryButton();
+        studetnDirectoryPage.displayWelcomeTextOnStudentPage();
+        studentHomePage.goToCoursePage();
+        studentCourseList.displayOurCoursesTitle();
+        studentCourseList.goToGrowthMarketingCourse();
+        studentGrowthMarketingCourseDetails.displayGrowthMarketingTitleCourse("Growth Marketing");
+        //studentGrowthMarketingCourseDetails.existsUploadCourseMaterialButton("Upload");
+        //studentGrowthMarketingCourseDetails.onExistsUploadCourseMaterialButton("Upload");
+    }
+
 
     @Test
     public void loginWitStudentValidCredentials() {
 
         signInPage.clickSignInButton();
-        signInPage.displayRegistrationForm();
-        signInPage.enterEmail("malik@example.com");
-        signInPage.enterPassword("123456");
-        signInPage.clickSignInButtonInRegistrForm();
-        hederPage.displayStudentDirectoryButton();
+        signInPage.loginAction("malik@example.com","123456");
+        hederPage.clickStudentDirectoryButton();
+        studetnDirectoryPage.displayWelcomeTextOnStudentPage();
     }
 
     @Test
@@ -39,10 +55,8 @@ public class SignInTest extends BaseTest {
         studentDirectoryPage.searchResultDisplayExactData();
         studentDirectoryPage.viewProfileButton();
         studentDetailsPage.displayStudenFullNameExactData();
-        studentHomePage.signOutStudent();
-
-
-
-
+        studentHomePage.checkSignOutStudent();
     }
+
+
 }

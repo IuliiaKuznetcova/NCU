@@ -1,15 +1,24 @@
-/*
 package E2E.tests;
 
-public class StudentCourseMaterialTest {
+import E2E.pages.SignInPage;
+import E2E.pages.gast.HederPage;
+import E2E.pages.student.StudentGrowthMarketingCourseDetails;
+import E2E.pages.student.StudetnDirectoryPage;
 
-       signInPage.clickSignInButton();
+public class StudentCourseMaterialTest extends BaseTest{
+
+    SignInPage signInPage = new SignInPage();
+    HederPage hederPage = new HederPage();
+    StudetnDirectoryPage studetnDirectoryPage = new StudetnDirectoryPage();
+    StudentGrowthMarketingCourseDetails studentGrowthMarketingCourseDetails = new StudentGrowthMarketingCourseDetails();
+public void metod() {
+
+        signInPage.clickSignInButton();
         signInPage.displayRegistrationForm();
-        signInPage.enterEmail("malik@example.com");
-        signInPage.enterPassword("123456");
-        signInPage.clickSignInButtonInRegistrForm();
+        signInPage.loginAction("malik@example.com","123456");
+        hederPage.clickStudentDirectoryButton();
+        studetnDirectoryPage.displayWelcomeTextOnStudentPage();
         hederPage.displayStudentDirectoryButton();
         hederPage.clickStudentDirectoryButton();
-        studentDirectoryPage.displayWelcomeTextOnStudentPage();
 }
-*/
+}
