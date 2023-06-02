@@ -6,6 +6,7 @@ import io.qameta.allure.selenide.AllureSelenide;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import utils.PropertiesLoader;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.Selenide.open;
@@ -13,7 +14,8 @@ import static com.codeborne.selenide.Selenide.open;
 public class BaseTest{
 
 
-    final static String BASE_URI = "https://jere237.softr.app/";
+    //final static String BASE_URI = "https://jere237.softr.app/";
+    final String BASE_URI = PropertiesLoader.loadProperties("url");
     @BeforeMethod
     public void setUp(){
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());

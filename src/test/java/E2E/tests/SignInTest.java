@@ -4,6 +4,7 @@ import E2E.pages.*;
 import E2E.pages.gast.HederPage;
 import E2E.pages.student.*;
 import org.testng.annotations.Test;
+import utils.PropertiesLoader;
 
 public class SignInTest extends BaseTest {
     SignInPage signInPage = new SignInPage();
@@ -14,16 +15,19 @@ public class SignInTest extends BaseTest {
     StudetnDirectoryPage studetnDirectoryPage = new StudetnDirectoryPage();
     StudentCourseList studentCourseList = new StudentCourseList();
     StudentGrowthMarketingCourseDetails studentGrowthMarketingCourseDetails = new StudentGrowthMarketingCourseDetails();
+
+    private String emailMalik = PropertiesLoader.loadProperties("malik@example.com");
+    private String passwordMalik = PropertiesLoader.loadProperties("123456");
     @Test
     public void visibilityOfDocumentsSharingOnStudentPage () {
 
         signInPage.clickSignInButton();
         signInPage.displayRegistrationForm();
-        signInPage.loginAction("malik@example.com","123456");
+        signInPage.loginAction("malik@example.com", "123456");
         hederPage.displayStudentDirectoryButton();
         hederPage.clickStudentDirectoryButton();
         studetnDirectoryPage.displayWelcomeTextOnStudentPage();
-        studentHomePage.goToCoursePage();
+        studentHomePage.goToCoursesPage();
         studentCourseList.displayOurCoursesTitle();
         studentCourseList.goToGrowthMarketingCourse();
         studentGrowthMarketingCourseDetails.displayGrowthMarketingTitleCourse("Growth Marketing");
@@ -36,7 +40,18 @@ public class SignInTest extends BaseTest {
     public void loginWitStudentValidCredentials() {
 
         signInPage.clickSignInButton();
-        signInPage.loginAction("malik@example.com","123456");
+        signInPage.loginAction("malik@example.com", "123456");
+        hederPage.clickStudentDirectoryButton();
+        studetnDirectoryPage.displayWelcomeTextOnStudentPage();
+    }
+
+    //TODO
+    // propertiesloader not working
+    @Test
+    public void loginWitStudentValidCredentialsPr() {
+
+        signInPage.clickSignInButton();
+        signInPage.loginAction(emailMalik, passwordMalik);
         hederPage.clickStudentDirectoryButton();
         studetnDirectoryPage.displayWelcomeTextOnStudentPage();
     }
