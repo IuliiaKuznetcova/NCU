@@ -1,50 +1,80 @@
 package E2E.pages.student;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
+import org.openqa.selenium.By;
 
 import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
 
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.Selenide.$x;
 
 
 public class StudentCourseList {
     private SelenideElement ourCourseTitle = $x("//*[@id=\"course-list-heading\"]/section/div/div/div/h1");
-
     private SelenideElement growthMarketingCourseButton = $x("//*[@id=\"course-list\"]/section/div/div/div[2]/div/div/div[1]/div/div/div[8]/div/div[1]/a");
     private SelenideElement fieldSearchOnCourseList = $x("//*[@id=\":r0:\"]");
     private SelenideElement searchResultOnCourseList = $x("//*[@id=\"course-list\"]/section/div/div/div[2]");
-
-    private SelenideElement growthMarketingCourseOnthePageScope = $x("//*[@id=\"course-list\"]/section/div/div/div[2]/div/div/div[1]/div/div/div[8]/div/div[1]/a");
-    private SelenideElement сomputerScienceCourseOnthePageScope = $x("//*[@id=\"course-list\"]/section/div/div/div[2]/div/div/div[1]/div/div/div[2]/div/div[1]/a");
-
-    private SelenideElement сomputerScienceTitle = $x("(//div)[291]");
-    private SelenideElement growthMarketingTitle = $x("(//div)[100]");
-
-    private SelenideElement growthMarketingCourseDescriptionOnTheCourseList = $x("(//div)[293]");
-    private SelenideElement сomputerScienceDescriptionOnTheCourseList = $x("(//div)[103]");
-
-    private SelenideElement professorBlockOnMarketingCourse = $x("(//div)[296]");
-    private SelenideElement professorBlockOnComputerScienceCourse = $x("(//div)[103]");
-    private SelenideElement professorMarieCurieOnProfessorBlockOnGrowthMarketing = $x("(//span)[71]");
-    private SelenideElement professorRoxanneOnProfessorBlockOnComputerScience = $x("(//span)[49]");
-    private SelenideElement professorMarieCurieOnProfessorBlockOnComputerScience = $x("(//span)[41]");
+    private SelenideElement growthMarketingCourseSearchResult = $x("//*[@id=\"course-list\"]/section/div/div/div[2]/div/div/div/div/div/div/div/div[1]/a");
+    private ElementsCollection courseBlockOnCourseListWidget = $$(By.className("vertical-list-item"));
 
 
-    @Step("Display our courses title")
+  /*  public void checkFirstWidgetTitle() {
+        courseBlockonCourseListWidget.get(1).$(By.className("MuiChip-root")).shouldHave(text("Marie"));
+    }*/
+
+    public void checkFirstWidgetTitle() {
+        //текстовый блок
+        //courseBlockonCourseListWidget.get(1).$(By.className("additional-elements-wrapper")).shouldHave(text("Mar"));
+        //Название курсов
+        //courseBlockonCourseListWidget.get(1).$(By.className("additional-elements-wrapper")).$(By.className("MuiBox-root")).shouldHave(text("Computer"));
+        //описание курса
+        //courseBlockonCourseListWidget.get(1).$(By.className("additional-elements-wrapper")).$(By.className("sw-font-size-s")).shouldHave(text("sys"));
+        //блок преподавателей
+        //courseBlockonCourseListWidget.get(1).$(By.className("additional-elements-wrapper")).$(By.className("css-1vykty2")).shouldHave(text("John"));
+        /*courseBlockonCourseListWidget.get(1).$(By.className("additional-elements-wrapper")).$(By.className("css-1vykty2")).shouldHave(text("Rox"));
+
+        courseBlockonCourseListWidget.find((By.className("additional-elements-wrapper")).$((By.className("css-1vykty2"));
+        courseBlockonCourseListWidget.find((By.className("additional-elements-wrapper")).findall((By.className("css-1vykty2"));
+        courseBlockonCourseListWidget.filterBy((By.className("additional-elements-wrapper")).findall((By.className("css-1vykty2"));*/
+
+        String titleCours = courseBlockOnCourseListWidget.get(1).$(By.className("additional-elements-wrapper")).$(By.className("css-1vykty2")).getText();
+        System.out.println(titleCours);
+    }
+
+    //TODO Нужно достать массив из course-details class StudentGrowthMarketingCourseDetails
+
+        public void checkAllWidgetTitle(String[] titleName) {
+        Map<Integer, String> expectedNames = new HashMap<>();
+        for (int i = 0; i < titleName.length; i++) {
+            expectedNames.put(i, titleName[i]);
+        }
+        for (Map.Entry<Integer, String> entry : expectedNames.entrySet()) {
+            int widgetIndex = entry.getKey();
+            String expectedName = entry.getValue();
+            //courseBlockonCourseListWidget.get(widgetIndex).$(By.className("MuiChip-root")).shouldHave(text(expectedName));
+            courseBlockOnCourseListWidget.get(widgetIndex).$(By.className("additional-elements-wrapper")).$(By.className("css-1vykty2")).shouldHave(text(expectedName));
+        }
+    }
+
+    @Step("Display our courses title Отображение названия Our courses")
     public void displayOurCoursesTitle() {
         ourCourseTitle.shouldBe(Condition.text("Our courses"));
     }
 
-    @Step("Go to Growth Marketing course")
+    @Step("Go to Growth Marketing course  Переход к курсу Growth Marketing")
     public void goToGrowthMarketingCourse() {
         growthMarketingCourseButton.shouldBe(visible, Duration.ofSeconds(10));
         growthMarketingCourseButton.click();
     }
 
-    @Step("Fill field search on course list")
+    @Step("Fill field search on course list Page Заполнение поля поиска на странице Course list")
     public void fillFieldSearchOnCourseList(String desiredValue) {
         fieldSearchOnCourseList.click();
         fieldSearchOnCourseList.shouldBe(visible, Duration.ofSeconds(10));
@@ -53,27 +83,7 @@ public class StudentCourseList {
         // scroll.scrollIntoView(false);
     }
 
-
-    @Step("ShouldBe element on Growth Marketing course on course list")
-    public void shouldBeElementOnGrowthMarketingCourse(){
-        growthMarketingCourseOnthePageScope.shouldBe(visible, Duration.ofSeconds(10));
-        сomputerScienceTitle.shouldBe(visible, Duration.ofSeconds(10));
-        growthMarketingCourseDescriptionOnTheCourseList.shouldBe(visible, Duration.ofSeconds(10));
-        professorBlockOnMarketingCourse.shouldBe(visible, Duration.ofSeconds(10));
-        professorMarieCurieOnProfessorBlockOnGrowthMarketing.shouldBe(visible, Duration.ofSeconds(10));
-    }
-
-    @Step("ShouldBe element on Computer Science on course list")
-    public void shouldBeElementOnComputerScienceCourse(){
-        сomputerScienceCourseOnthePageScope.shouldBe(visible, Duration.ofSeconds(10));
-        growthMarketingTitle.shouldBe(visible, Duration.ofSeconds(10));
-        сomputerScienceDescriptionOnTheCourseList.shouldBe(visible, Duration.ofSeconds(10));
-        professorBlockOnComputerScienceCourse.shouldBe(visible, Duration.ofSeconds(10));
-        professorRoxanneOnProfessorBlockOnComputerScience.shouldBe(visible, Duration.ofSeconds(10));
-        professorMarieCurieOnProfessorBlockOnComputerScience.shouldBe(visible, Duration.ofSeconds(10));
-    }
-
-    @Step("Fill field search on course list")
+    @Step("Fill field search on course list Page  Заполнение поля поиска на странице Сourse list\"")
     public void fillFieldSearch(String courseName) {
         fieldSearchOnCourseList.click();
         fieldSearchOnCourseList.shouldBe(visible, Duration.ofSeconds(10));
@@ -81,15 +91,15 @@ public class StudentCourseList {
         fieldSearchOnCourseList.shouldBe(visible, Duration.ofSeconds(10));
        }
 
-    @Step("Search result on course list")
+    @Step("Search result on course list page  Результат поиска на странице Сourse list")
     public void searchResultDisplayExactData(String courseName) {
         searchResultOnCourseList.shouldHave(Condition.text(courseName));
     }
 
-    @Step("Go to a course from a search result")
+    @Step("Go to a course from a search result  Переход к курсу из результата поиска")
     public void goToCourseFromSearchResult() {
         searchResultOnCourseList.shouldBe(visible, Duration.ofSeconds(10));
-        searchResultOnCourseList.click();
+        growthMarketingCourseSearchResult.click();
     }
 
 }

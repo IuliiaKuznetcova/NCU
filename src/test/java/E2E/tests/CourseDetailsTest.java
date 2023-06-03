@@ -2,9 +2,9 @@ package E2E.tests;
 
 import org.testng.annotations.Test;
 
-public class StudentCourseMaterialTest extends BaseTest{
+public class CourseDetailsTest extends BaseTest{
 
-@Test
+    @Test
     public void searchForTiecherInTheCourseGrowthMarketing() {
         signInPage.loginMalik();
         studentHomePage.goToCoursesPage();
@@ -14,6 +14,4 @@ public class StudentCourseMaterialTest extends BaseTest{
         //studentGrowthMarketingCourseDetails.displayGrowthMarketingTitleCourse("Growth Marketing");
         studentGrowthMarketingCourseDetails.dysplayngInformationAboutCourseTiecher();
     }
-
-
 }

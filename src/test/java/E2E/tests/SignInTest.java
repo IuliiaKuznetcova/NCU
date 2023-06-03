@@ -1,29 +1,16 @@
 package E2E.tests;
 
-import E2E.pages.*;
-import E2E.pages.gast.HederPage;
-import E2E.pages.student.*;
 import org.testng.annotations.Test;
 import utils.PropertiesLoader;
 
 public class SignInTest extends BaseTest {
-    SignInPage signInPage = new SignInPage();
-    HederPage hederPage = new HederPage();
-    StudetnDirectoryPage studentDirectoryPage = new StudetnDirectoryPage();
-    StudentDetailsPage studentDetailsPage = new StudentDetailsPage();
-    StudentHomePage studentHomePage = new StudentHomePage();
-    StudetnDirectoryPage studetnDirectoryPage = new StudetnDirectoryPage();
-    StudentCourseList studentCourseList = new StudentCourseList();
-    StudentGrowthMarketingCourseDetails studentGrowthMarketingCourseDetails = new StudentGrowthMarketingCourseDetails();
-
-    private String emailMalik = PropertiesLoader.loadProperties("malik@example.com");
-    private String passwordMalik = PropertiesLoader.loadProperties("123456");
+    private String emailMalik = PropertiesLoader.loadProperties("emailMalik");
+    private String passwordMalik = PropertiesLoader.loadProperties("passwordMalik");
     @Test
     public void visibilityOfDocumentsSharingOnStudentPage () {
-
         signInPage.clickSignInButton();
         signInPage.displayRegistrationForm();
-        signInPage.loginAction("malik@example.com", "123456");
+        signInPage.loginAction(emailMalik, passwordMalik);
         hederPage.displayStudentDirectoryButton();
         hederPage.clickStudentDirectoryButton();
         studetnDirectoryPage.displayWelcomeTextOnStudentPage();
@@ -35,21 +22,16 @@ public class SignInTest extends BaseTest {
         //studentGrowthMarketingCourseDetails.onExistsUploadCourseMaterialButton("Upload");
     }
 
-
     @Test
     public void loginWitStudentValidCredentials() {
-
         signInPage.clickSignInButton();
-        signInPage.loginAction("malik@example.com", "123456");
+        signInPage.loginAction(emailMalik, passwordMalik);
         hederPage.clickStudentDirectoryButton();
         studetnDirectoryPage.displayWelcomeTextOnStudentPage();
     }
 
-    //TODO
-    // propertiesloader not working
     @Test
     public void loginWitStudentValidCredentialsPr() {
-
         signInPage.clickSignInButton();
         signInPage.loginAction(emailMalik, passwordMalik);
         hederPage.clickStudentDirectoryButton();
@@ -72,6 +54,4 @@ public class SignInTest extends BaseTest {
         studentDetailsPage.displayStudenFullNameExactData();
         studentHomePage.checkSignOutStudent();
     }
-
-
 }

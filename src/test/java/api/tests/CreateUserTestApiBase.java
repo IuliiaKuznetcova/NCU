@@ -12,13 +12,14 @@ import io.restassured.response.Response;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
-public class CreateUserTestApiBase extends ApiBase {
-    String endpoint = "/users";
-    Faker faker = new Faker();
-    String fullName = faker.name().fullName();
-    String email = faker.internet().emailAddress();
+import static com.codeborne.selenide.Selenide.open;
 
-    final static String BASE_URI = "https://jere237.softr.app/";
+public class CreateUserTestApiBase extends ApiBase {
+
+
+
+    final static String BASE_URI = "https://jere237.softr.app";
+    //final static String BASE_URI = "https://www.google.de/";
 
     @Test
     public void successfulCreateUserWithExactData() {
@@ -30,7 +31,7 @@ public class CreateUserTestApiBase extends ApiBase {
                 .generate_magic_link(false)
                 .build();
 
-        Response response = postRequest(endpoint, 201, requestBody);
+        postRequest(endpoint, 201, requestBody);
     }
 
     @Test
@@ -42,17 +43,11 @@ public class CreateUserTestApiBase extends ApiBase {
                 .generate_magic_link(false)
                 .build();
 
-        Response response = postRequest(endpoint, 201, requestBody);
+        postRequest(endpoint, 201, requestBody);
     }
 
-/*    @AfterMethod
-    public void afterTest() {
-        deleteRequest(endpoint + email, 200);
-    }*/
-
-    @Test
+     @Test
     public void successfulCreateUserApiAndUi() {
-
         SignInPage signInPage = new SignInPage();
         HederPage hederPage = new HederPage();
         StudentHomePage studentHomePage = new StudentHomePage();
@@ -62,7 +57,7 @@ public class CreateUserTestApiBase extends ApiBase {
                 .password("777555")
                 .generate_magic_link(false)
                 .build();
-        Response response = postRequest(endpoint, 201, requestBody);
+        postRequest(endpoint, 201, requestBody);
         Selenide.open(BASE_URI);
         signInPage.clickSignInButton();
         signInPage.loginAction(email, "777555");
@@ -107,5 +102,8 @@ public class CreateUserTestApiBase extends ApiBase {
         studentHomePage.checkSignOutStudent();
     }
 
-
+    @AfterMethod
+    public void afterTest() {
+        deleteRequest(endpoint+email, 200);
+    }
 }
