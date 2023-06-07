@@ -1,8 +1,5 @@
 package api.tests;
 
-import E2E.pages.SignInPage;
-import E2E.pages.gast.HederPage;
-import E2E.pages.student.StudentHomePage;
 import api.dto.ValidUserCredentials;
 import com.codeborne.selenide.Configuration;
 import com.github.javafaker.Faker;
@@ -14,8 +11,6 @@ import io.restassured.specification.RequestSpecification;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-
-
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 
@@ -27,8 +22,8 @@ public class ApiBase {
 
     String endpoint = "/users/";
     Faker faker = new Faker();
-    String fullName = faker.name().fullName();
-    String email = faker.internet().emailAddress();
+    public String fullName = faker.name().fullName();
+    public String email = faker.internet().emailAddress();
     @BeforeMethod
     public void setUp(){
         Configuration.browserCapabilities = new ChromeOptions().addArguments("-remote-allow-origins=*");

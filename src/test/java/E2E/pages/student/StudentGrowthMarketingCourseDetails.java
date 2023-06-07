@@ -17,10 +17,10 @@ import static com.codeborne.selenide.Selenide.*;
 public class StudentGrowthMarketingCourseDetails {
     private SelenideElement growthMarketingTitleCourse = $x("//h3[normalize-space()='Growth Marketing']");
     private SelenideElement uploadCourseMaterialButton = $x("(//button[normalize-space()='Upload'])[1]");
-    private ElementsCollection courseInformationWidget = $$(By.className("MuiGrid-container"));
     //private ElementsCollection courseInformationWidget = $$(By.className("//*[@id=\"course-details\"]/section/div/div/div/div/div/div[2]/div/div/div[1]"));
     //TODO Нижний путь отрабатывает
-    //private ElementsCollection courseInformationWidget = $$(By.className("MuiGrid-container")).get(1).$(By.className("sw-font-size-xl"));
+    //private ElementsCollection courseInformationWidget = $$(By.className("MuiGrid-container"));
+    private ElementsCollection courseInformationWidget = $$(By.className("MuiGrid-container")).get(1).$$(By.className("sw-font-size-xl"));
 
 
     public void displayGrowthMarketingTitleCourse(String searchInput) {
@@ -41,10 +41,26 @@ public class StudentGrowthMarketingCourseDetails {
     @Step("Dysplay course information  Отображение информации об учителях курса")
     public void dysplayngInformationAboutCourseTiecher() {
         //вытащить из коллекции содержимое блока преподаватели
+        courseInformationWidget.get(1).$(By.className("sw-font-size-xl")).shouldHave(text("Heading3"));
+
+
+
+        //$$(By.className("//*[@id=\"course-details\"]/section/div/div/div/div/div/div[2]/div/div/div[1]")).first().shouldHave(text("\"Heading3\""));
+        //courseInformationWidget.first().shouldHave(text("Heading3"));
+        //$$(By.className("MuiGrid-container")).get(1).$(By.className("sw-font-size-xl")).shouldHave(text("Heading3"));
+
+//TODO в courseInformationWidget указать локатор, указанный над этой строчкой
+
+
+    }
+
+    @Step("Dysplay course information  Отображение информации об учителях курса")
+    public void printInformationAboutCourseTiecher() {
+        //вытащить из коллекции содержимое блока преподаватели
         //courseInformationWidget.get(1).$(By.className("sw-font-size-xl")).shouldHave(text("Heading3"));
         //$$(By.className("//*[@id=\"course-details\"]/section/div/div/div/div/div/div[2]/div/div/div[1]")).first().shouldHave(text("\"Heading3\""));
         //courseInformationWidget.first().shouldHave(text("Heading3"));
-        $$(By.className("MuiGrid-container")).get(1).$(By.className("sw-font-size-xl")).shouldHave(text("Heading3"));
+        //$$(By.className("MuiGrid-container")).get(1).$(By.className("sw-font-size-xl")).shouldHave(text("Heading3"));
 
 //TODO в courseInformationWidget указать локатор, указанный над этой строчкой
 
@@ -54,9 +70,11 @@ public class StudentGrowthMarketingCourseDetails {
         for(SelenideElement element : courseInformationWidget) {
             professors.add(element.getAttribute("professor"));
         }
-        for (int i = 0; i <professors.size() ; i++) {
+        System.out.println(professors);
+       /* for (int i = 0; i <professors.size() ; i++) {
             String listProfessors = professors.get(i);
-            System.out.println(listProfessors);
-        }
+           // System.out.println(listProfessors);
+
+        }*/
     }
 }

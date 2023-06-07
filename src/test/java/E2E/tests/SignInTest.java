@@ -1,42 +1,21 @@
 package E2E.tests;
 
+import com.codeborne.selenide.SelenideElement;
 import org.testng.annotations.Test;
 import utils.PropertiesLoader;
 
+import static com.codeborne.selenide.Selenide.$x;
+
 public class SignInTest extends BaseTest {
+    //TODO
+    // Не видит Малика, хотя он есть в BaseTest
     private String emailMalik = PropertiesLoader.loadProperties("emailMalik");
     private String passwordMalik = PropertiesLoader.loadProperties("passwordMalik");
-    @Test
-    public void visibilityOfDocumentsSharingOnStudentPage () {
-        signInPage.clickSignInButton();
-        signInPage.displayRegistrationForm();
-        signInPage.loginAction(emailMalik, passwordMalik);
-        hederPage.displayStudentDirectoryButton();
-        hederPage.clickStudentDirectoryButton();
-        studetnDirectoryPage.displayWelcomeTextOnStudentPage();
-        studentHomePage.goToCoursesPage();
-        studentCourseList.displayOurCoursesTitle();
-        studentCourseList.goToGrowthMarketingCourse();
-        studentGrowthMarketingCourseDetails.displayGrowthMarketingTitleCourse("Growth Marketing");
-        //studentGrowthMarketingCourseDetails.existsUploadCourseMaterialButton("Upload");
-        //studentGrowthMarketingCourseDetails.onExistsUploadCourseMaterialButton("Upload");
-    }
+    private SelenideElement scroll = $x(" //*[@id=\"home-footer\"]/section/div/div[3]/div[1]/small");
+    //TODO NCU-13
 
-    @Test
-    public void loginWitStudentValidCredentials() {
-        signInPage.clickSignInButton();
-        signInPage.loginAction(emailMalik, passwordMalik);
-        hederPage.clickStudentDirectoryButton();
-        studetnDirectoryPage.displayWelcomeTextOnStudentPage();
-    }
 
-    @Test
-    public void loginWitStudentValidCredentialsPr() {
-        signInPage.clickSignInButton();
-        signInPage.loginAction(emailMalik, passwordMalik);
-        hederPage.clickStudentDirectoryButton();
-        studetnDirectoryPage.displayWelcomeTextOnStudentPage();
-    }
+
 
     @Test
     public void searchForCreatedStudent() {

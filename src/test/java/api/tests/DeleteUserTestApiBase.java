@@ -1,19 +1,18 @@
 package api.tests;
 
-import io.restassured.RestAssured;
-import io.restassured.response.Response;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class DeleteUserTestApiBase extends ApiBase {
-    /*String endpoint = "/users/";
-    String email = "stephan.kertzmann@gmail.com";*/
+    String endpoint = "/users/";
+    String email = "carlton.corkery@hotmail.com";
     @BeforeMethod
-//TODO удаляет дважды, нужно починить
+
+    //TODO удаляет дважды, хотя автометод удаления на каждый тест я убрала
 
     @Test
     public void successDelete(){
 
-        Response response = deleteRequest(endpoint+email ,200);
+        deleteRequest(endpoint+email ,200);
     }
 }

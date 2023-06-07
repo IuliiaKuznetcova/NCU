@@ -1,4 +1,4 @@
-package E2E.pages.gast;
+package E2E.pages.guest;
 
 import com.codeborne.selenide.SelenideElement;
 

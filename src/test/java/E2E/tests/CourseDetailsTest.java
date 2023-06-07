@@ -2,7 +2,10 @@ package E2E.tests;
 
 import org.testng.annotations.Test;
 
-public class CourseDetailsTest extends BaseTest{
+import static com.codeborne.selenide.Selenide.open;
+
+public class CourseDetailsTest extends BaseTest {
+
 
     @Test
     public void searchForTiecherInTheCourseGrowthMarketing() {
@@ -14,4 +17,6 @@ public class CourseDetailsTest extends BaseTest{
         //studentGrowthMarketingCourseDetails.displayGrowthMarketingTitleCourse("Growth Marketing");
         studentGrowthMarketingCourseDetails.dysplayngInformationAboutCourseTiecher();
     }
+
+
 }

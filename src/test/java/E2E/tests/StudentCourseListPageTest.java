@@ -2,14 +2,14 @@ package E2E.tests;
 
 import org.testng.annotations.Test;
 
-public class StudentCourseListPageTest extends BaseTest{
+public class StudentCourseListPageTest extends BaseTest {
 
     @Test
     public void checkFirstWidgetTitle() {
         signInPage.loginMalik();
         studentHomePage.goToCoursesPage();
         //studentCourseList.checkFirstWidgetTitle();
-       // studentCourseList.checkAllWidgetTitle();
+        //studentCourseList.checkAllWidgetTitle();
         }
     @Test
     public void searchCourse() {

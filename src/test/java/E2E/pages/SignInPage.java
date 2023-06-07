@@ -1,9 +1,7 @@
 package E2E.pages;
 
-import E2E.tests.BaseTest;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
-import org.testng.annotations.Test;
 
 import java.time.Duration;
 

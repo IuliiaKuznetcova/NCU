@@ -1,6 +1,6 @@
 package E2E.pages.student;
 
-import E2E.pages.gast.HederPage;
+import E2E.pages.guest.HederPage;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
@@ -16,6 +16,7 @@ public class StudentHomePage {
     private SelenideElement signOutStudentButton = $x("(//a[@role='menuitem'])[2]");
     private SelenideElement coursesButton = $x("//*[@id=\"home_header4\"]/header/div/div/div[1]/a[2]/span");
     private SelenideElement coursesLIstButton = $x("//*[@id=\"home_header4\"]/header/div/div/div[1]/div/div/div/a/span[1]");
+    private SelenideElement scroll = $x(" //*[@id=\"home-footer\"]/section/div/div[3]/div[1]/small");
     HederPage hederPage = new HederPage();
 
     @Step("Display title professor Spotlight отображение заголовка")
@@ -36,7 +37,10 @@ public class StudentHomePage {
         coursesButton.click();
         coursesLIstButton.click();
         //coursesLIstButton.shouldBe(visible, Duration.ofSeconds(10));
+    }
 
-
+    @Step("Scroll page to element 2023NoCode Проскролить страницу до элемента 2023NoCode")
+    public void scrollPageToElement2023NoCode(){
+        scroll.scrollIntoView(false);
     }
 }
