@@ -11,6 +11,7 @@ import io.restassured.specification.RequestSpecification;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 
@@ -24,8 +25,9 @@ public class ApiBase {
     Faker faker = new Faker();
     public String fullName = faker.name().fullName();
     public String email = faker.internet().emailAddress();
+
     @BeforeMethod
-    public void setUp(){
+    public void setUp() {
         Configuration.browserCapabilities = new ChromeOptions().addArguments("-remote-allow-origins=*");
     }
 
@@ -37,13 +39,10 @@ public class ApiBase {
                 .password("777555")
                 .generate_magic_link(false)
                 .build();
-        postRequest(endpoint, 201, requestBody);}
-
-
-    @AfterMethod
-    public void tearDown(){
-        closeWebDriver();
+        postRequest(endpoint, 201, requestBody);
     }
+
+
     static RequestSpecification specification = new RequestSpecBuilder() {
     }
             .setUrlEncodingEnabled(false)
@@ -52,8 +51,6 @@ public class ApiBase {
             .addHeader("Softr-Api-Key", API_KEY)
             .addHeader("Softr-Domain", DOMAIN)
             .build();
-
-
 
 
     public Response postRequest(String endPoint, Integer responseCode, Object body) {

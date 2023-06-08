@@ -7,8 +7,11 @@ import E2E.pages.student.StudentHomePage;
 import E2E.pages.student.StudetnDirectoryPage;
 import com.codeborne.selenide.Selenide;
 import api.dto.ValidUserCredentials;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 import utils.PropertiesLoader;
+
+import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 public class CreateUserTestApiBase extends ApiBase {
 
@@ -26,7 +29,7 @@ public class CreateUserTestApiBase extends ApiBase {
                 .build();
         postRequest(endpoint, 201, requestBody);
 
-        deleteRequest(endpoint+email ,200);
+        // deleteRequest(endpoint+email ,200);
     }
 
     @Test
@@ -39,7 +42,7 @@ public class CreateUserTestApiBase extends ApiBase {
                 .build();
         postRequest(endpoint, 201, requestBody);
 
-        deleteRequest(endpoint+email ,200);
+        // deleteRequest(endpoint+email ,200);
     }
 
     @Test
@@ -69,15 +72,21 @@ public class CreateUserTestApiBase extends ApiBase {
         studentDetailsPage.displayStudenFullNameRandomData(fullName);
         studentHomePage.checkSignOutStudent();
 
-        deleteRequest(endpoint+email ,200);
+        //deleteRequest(endpoint+email ,200);
     }
 
     // TODO Если удаление ставить в самом тесте (совет Ивана),
     //  а он не проходит, то не проходит и уделение
 
 
-  /*  @AfterMethod
+    @AfterMethod
     public void afterTest() {
-        deleteRequest(endpoint+email, 200);
+        deleteRequest(endpoint + email, 200);
+        closeWebDriver();
+    }
+
+  /*  @AfterMethod
+    public void tearDown() {
+        closeWebDriver();
     }*/
 }
