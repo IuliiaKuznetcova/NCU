@@ -2,6 +2,7 @@ package api.tests;
 
 import E2E.pages.*;
 import E2E.pages.guest.HederPage;
+import E2E.pages.helpers.CourseHelper;
 import E2E.pages.student.StudentDetailsPage;
 import E2E.pages.student.StudentHomePage;
 import E2E.pages.student.StudetnDirectoryPage;
@@ -14,7 +15,7 @@ import utils.PropertiesLoader;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 public class CreateUserTestApiBase extends ApiBase {
-
+    CourseHelper courseHelper = new CourseHelper();
     private String emailMalik = PropertiesLoader.loadProperties("emailMalik");
     private String passwordMalik = PropertiesLoader.loadProperties("passwordMalik");
     final static String BASE_URI = "https://jere237.softr.app";
@@ -28,8 +29,6 @@ public class CreateUserTestApiBase extends ApiBase {
                 .generate_magic_link(false)
                 .build();
         postRequest(endpoint, 201, requestBody);
-
-        // deleteRequest(endpoint+email ,200);
     }
 
     @Test
@@ -41,12 +40,10 @@ public class CreateUserTestApiBase extends ApiBase {
                 .generate_magic_link(false)
                 .build();
         postRequest(endpoint, 201, requestBody);
-
-        // deleteRequest(endpoint+email ,200);
     }
 
     @Test
-    public void successfulCreateUserApiAndUiWithLoginCheck() {
+    public void successfulCreateUserApiAndUiWithLoginCheck() throws InterruptedException {
         SignInPage signInPage = new SignInPage();
         HederPage hederPage = new HederPage();
         StudetnDirectoryPage studetnDirectoryPage = new StudetnDirectoryPage();
@@ -66,27 +63,13 @@ public class CreateUserTestApiBase extends ApiBase {
         hederPage.displayStudentDirectoryButton();
         hederPage.clickStudentDirectoryButton();
         studetnDirectoryPage.displayWelcomeTextOnStudentPage();
-        studetnDirectoryPage.fillFieldSearch(fullName);
-        studetnDirectoryPage.searchResultDisplayRandomData(fullName);
-        studetnDirectoryPage.viewProfileButton();
-        studentDetailsPage.displayStudenFullNameRandomData(fullName);
+        courseHelper.searchStudentWithCheck(fullName);
         studentHomePage.checkSignOutStudent();
-
-        //deleteRequest(endpoint+email ,200);
     }
-
-    // TODO Если удаление ставить в самом тесте (совет Ивана),
-    //  а он не проходит, то не проходит и уделение
-
 
     @AfterMethod
     public void afterTest() {
         deleteRequest(endpoint + email, 200);
         closeWebDriver();
     }
-
-  /*  @AfterMethod
-    public void tearDown() {
-        closeWebDriver();
-    }*/
 }

@@ -33,7 +33,7 @@ public class SignInPage {
         emailField
                 .shouldBe(visible, Duration.ofSeconds(10))
                 .setValue(emailValue);
-   }
+    }
 
     @Step("Enter Password Введение пароля")
     public void enterPassword(String passwordValue) {
@@ -46,7 +46,7 @@ public class SignInPage {
         signInButtonInRegistrForm.shouldBe(visible, Duration.ofSeconds(10));
     }
 
-     @Step("Login action with enter email, password and click Sign In Button Авторизация с введением емейла, пароля и нажатием кнопки Sign In")
+    @Step("Login action with enter email, password and click Sign In Button Авторизация с введением емейла, пароля и нажатием кнопки Sign In")
     public void loginAction(String emailValue, String passwordValue) {
         registrationForm.shouldBe(visible, Duration.ofSeconds(10));
         emailField.shouldBe(visible, Duration.ofSeconds(10));
@@ -54,6 +54,7 @@ public class SignInPage {
         passwordField.setValue(passwordValue);
         signInButtonInRegistrForm.click();
         signInButtonInRegistrForm.shouldBe(visible, Duration.ofSeconds(10));
+
     }
 
 

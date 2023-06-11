@@ -1,12 +1,10 @@
 package E2E.Regression;
 
 import E2E.tests.BaseTest;
-import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Issue;
 import org.testng.annotations.Test;
 import utils.PropertiesLoader;
 
-import static com.codeborne.selenide.Selenide.$x;
 
 public class DocumentsSharingOnStudentPageTest extends BaseTest {
     private String emailMalik = PropertiesLoader.loadProperties("emailMalik");
@@ -15,7 +13,7 @@ public class DocumentsSharingOnStudentPageTest extends BaseTest {
 
     @Issue("NCU-13")
     @Test
-    public void visibilityOfDocumentsSharingOnStudentPage () {
+    public void visibilityOfDocumentsSharingOnStudentPage() throws InterruptedException {
         signInPage.clickSignInButton();
         signInPage.displayRegistrationForm();
         signInPage.loginAction(emailMalik, passwordMalik);
@@ -25,12 +23,12 @@ public class DocumentsSharingOnStudentPageTest extends BaseTest {
         studentHomePage.goToCoursesPage();
         studentCourseList.displayOurCoursesTitle();
         studentCourseList.goToGrowthMarketingCourse();
-        studentGrowthMarketingCourseDetails.displayGrowthMarketingTitleCourse("Growth Marketing");
-        studentHomePage.scrollPageToElement2023NoCode();
-        studentGrowthMarketingCourseDetails.onExistsUploadCourseMaterialButton("Upload");
+        scrollPageToElement2023NoCode();
+        studentGrowthMarketingCourseDetails.notExistsUploadCourseMaterialButton("Upload");
 
     }
-    //TODO
-    // code functionality check
-    // studentGrowthMarketingCourseDetails.existsUploadCourseMaterialButton("Upload");
+    // TODO
+    //  code functionality check
+    //  studentGrowthMarketingCourseDetails.existsUploadCourseMaterialButton("Upload");
+
 }

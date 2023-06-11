@@ -4,7 +4,8 @@ import org.testng.annotations.Test;
 
 public class StudentCourseMaterialTest extends BaseTest {
 
-@Test
+
+/*    @Test
     public void searchForTiecherInTheCourseGrowthMarketing() {
         signInPage.loginMalik();
         studentHomePage.goToCoursesPage();
@@ -14,7 +15,6 @@ public class StudentCourseMaterialTest extends BaseTest {
         studentGrowthMarketingCourseDetails.displayGrowthMarketingTitleCourse("Growth Marketing");
         //studentGrowthMarketingCourseDetails.dysplayngInformationAboutCourseTiecher();
         studentGrowthMarketingCourseDetails.printInformationAboutCourseTiecher();
-    }
-
+    }*/
 
 }

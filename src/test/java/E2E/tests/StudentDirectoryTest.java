@@ -6,8 +6,9 @@ import utils.PropertiesLoader;
 public class StudentDirectoryTest extends BaseTest {
     private String emailMalik = PropertiesLoader.loadProperties("emailMalik");
     private String passwordMalik = PropertiesLoader.loadProperties("passwordMalik");
+
     @Test
-    public void goToStudentDirectory() {
+    public void goToStudentDirectory() throws InterruptedException {
         signInPage.loginMalik();
         hederPage.clickStudentDirectoryButton();
         studetnDirectoryPage.displayWelcomeTextOnStudentPage();
@@ -16,7 +17,7 @@ public class StudentDirectoryTest extends BaseTest {
     }
 
     @Test
-    public void loginWitStudentValidCredentials() {
+    public void loginWitStudentValidCredentials() throws InterruptedException {
         signInPage.clickSignInButton();
         signInPage.loginAction(emailMalik, passwordMalik);
         hederPage.clickStudentDirectoryButton();

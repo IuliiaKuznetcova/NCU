@@ -3,6 +3,7 @@ package api.tests;
 import api.dto.ValidUserCredentials;
 import com.codeborne.selenide.Configuration;
 import com.github.javafaker.Faker;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
@@ -54,6 +55,7 @@ public class ApiBase {
 
 
     public Response postRequest(String endPoint, Integer responseCode, Object body) {
+        RestAssured.filters(new AllureRestAssured());
         Response response = RestAssured.given()
                 .spec(specification)
                 .body(body)
@@ -68,7 +70,7 @@ public class ApiBase {
 
 
     public Response deleteRequest(String endPoint, Integer responseCode) {
-
+        RestAssured.filters(new AllureRestAssured());
         Response response = RestAssured.given()
                 .spec(specification)
                 .when()

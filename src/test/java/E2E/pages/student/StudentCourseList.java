@@ -5,6 +5,7 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
+import org.testng.annotations.Test;
 
 import java.time.Duration;
 import java.util.HashMap;
@@ -15,21 +16,20 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.Selenide.$x;
 
-
 public class StudentCourseList {
     private SelenideElement ourCourseTitle = $x("//*[@id=\"course-list-heading\"]/section/div/div/div/h1");
     private SelenideElement growthMarketingCourseButton = $x("//*[@id=\"course-list\"]/section/div/div/div[2]/div/div/div[1]/div/div/div[8]/div/div[1]/a");
     private SelenideElement fieldSearchOnCourseList = $x("//*[@id=\":r0:\"]");
     private SelenideElement searchResultOnCourseList = $x("//*[@id=\"course-list\"]/section/div/div/div[2]");
-    private SelenideElement growthMarketingCourseSearchResult = $x("//*[@id=\"course-list\"]/section/div/div/div[2]/div/div/div/div/div/div/div/div[1]/a");
+    //private SelenideElement growthMarketingCourseSearchResult = $x("//*[@id=\"course-list\"]/section/div/div/div[2]/div/div/div/div/div/div/div/div[1]/a");
+    //private SelenideElement growthMarketingCourseSearchResult = $x("//*[@id=\"course-list\"]/section/div/div/div[2]/div/div/div/div/div/div");
     private ElementsCollection courseBlockOnCourseListWidget = $$(By.className("vertical-list-item"));
 
-
-  /*  public void checkFirstWidgetTitle() {
-        courseBlockonCourseListWidget.get(1).$(By.className("MuiChip-root")).shouldHave(text("Marie"));
-    }*/
-
     public void checkFirstWidgetTitle() {
+        courseBlockOnCourseListWidget.get(1).$(By.className("MuiChip-root")).shouldHave(text("Marie"));
+    }
+
+    public void checkFirstWidgetTitle1() {
         //текстовый блок
         //courseBlockonCourseListWidget.get(1).$(By.className("additional-elements-wrapper")).shouldHave(text("Mar"));
         //Название курсов
@@ -50,7 +50,7 @@ public class StudentCourseList {
 
     //TODO Нужно достать массив из course-details class StudentGrowthMarketingCourseDetails
 
-        public void checkAllWidgetTitle(String[] titleName) {
+    public void checkAllWidgetTitle(String[] titleName) {
         Map<Integer, String> expectedNames = new HashMap<>();
         for (int i = 0; i < titleName.length; i++) {
             expectedNames.put(i, titleName[i]);
@@ -59,7 +59,9 @@ public class StudentCourseList {
             int widgetIndex = entry.getKey();
             String expectedName = entry.getValue();
             //courseBlockonCourseListWidget.get(widgetIndex).$(By.className("MuiChip-root")).shouldHave(text(expectedName));
-            courseBlockOnCourseListWidget.get(widgetIndex).$(By.className("additional-elements-wrapper")).$(By.className("css-1vykty2")).shouldHave(text(expectedName));
+            courseBlockOnCourseListWidget.get(widgetIndex).
+                    $(By.className("additional-elements-wrapper")).
+                    $(By.className("css-1vykty2")).shouldHave(text(expectedName));
         }
     }
 
@@ -89,7 +91,7 @@ public class StudentCourseList {
         fieldSearchOnCourseList.shouldBe(visible, Duration.ofSeconds(10));
         fieldSearchOnCourseList.setValue(courseName);
         fieldSearchOnCourseList.shouldBe(visible, Duration.ofSeconds(10));
-       }
+    }
 
     @Step("Search result on course list page  Результат поиска на странице Сourse list")
     public void searchResultDisplayExactData(String courseName) {
@@ -97,9 +99,10 @@ public class StudentCourseList {
     }
 
     @Step("Go to a course from a search result  Переход к курсу из результата поиска")
-    public void goToCourseFromSearchResult() {
+    public void goToCourseFromSearchResult(String courseName) {
         searchResultOnCourseList.shouldBe(visible, Duration.ofSeconds(10));
-        growthMarketingCourseSearchResult.click();
+        searchResultOnCourseList.shouldHave(Condition.text(courseName));
+
     }
 
 }

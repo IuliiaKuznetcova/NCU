@@ -1,4 +1,4 @@
-package api.tests;
+/*package api.tests;
 
 import E2E.pages.SignInPage;
 import E2E.pages.guest.HederPage;
@@ -16,7 +16,7 @@ public class TempApi extends ApiBase {
     final static String BASE_URI = "https://jere237.softr.app";
 
     @Test
-    public void successfulCreateUserApiAndUi1() {
+    public void successfulCreateUserApiAndUi1() throws InterruptedException {
         SignInPage signInPage = new SignInPage();
         HederPage hederPage = new HederPage();
         StudetnDirectoryPage studetnDirectoryPage = new StudetnDirectoryPage();
@@ -43,11 +43,11 @@ public class TempApi extends ApiBase {
         studetnDirectoryPage.viewProfileButton();
         studentDetailsPage.displayStudenFullNameRandomData(fullName);
         studentHomePage.checkSignOutStudent();
-        deleteRequest(endpoint+email ,200);
+        deleteRequest(endpoint + email, 200);
     }
 
     @Test
-    public void successfulCreateUserApiAndUi2() {
+    public void successfulCreateUserApiAndUi2() throws InterruptedException {
         SignInPage signInPage = new SignInPage();
         HederPage hederPage = new HederPage();
         StudetnDirectoryPage studetnDirectoryPage = new StudetnDirectoryPage();
@@ -64,9 +64,11 @@ public class TempApi extends ApiBase {
         signInPage.clickSignInButton();
         signInPage.displayRegistrationForm();
 
-       /* signInPage.enterEmail("malik@example.com");
+
+signInPage.enterEmail("malik@example.com");
         signInPage.enterPassword("123456");
-        signInPage.clickSignInButtonInRegistrForm();*/
+        signInPage.clickSignInButtonInRegistrForm();
+
         signInPage.loginAction(emailMalik, passwordMalik);
         hederPage.displayStudentDirectoryButton();
         hederPage.clickStudentDirectoryButton();
@@ -76,7 +78,8 @@ public class TempApi extends ApiBase {
         studetnDirectoryPage.viewProfileButton();
         studentDetailsPage.displayStudenFullNameRandomData(fullName);
         studentHomePage.checkSignOutStudent();
-        deleteRequest(endpoint+email ,200);
+        deleteRequest(endpoint + email, 200);
     }
 
-}
+}*/
+

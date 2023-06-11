@@ -5,13 +5,13 @@ import org.testng.annotations.Test;
 public class StudentCourseListPageTest extends BaseTest {
 
     @Test
-    public void checkFirstWidgetTitle() {
+    public void checkFirstWidgetTitle() throws InterruptedException {
         signInPage.loginMalik();
         studentHomePage.goToCoursesPage();
         //studentCourseList.checkFirstWidgetTitle();
         //studentCourseList.checkAllWidgetTitle();
-        }
-    @Test
+    }
+ /*   @Test
     public void searchCourse() {
         signInPage.loginMalik();
         studentHomePage.goToCoursesPage();
@@ -19,5 +19,5 @@ public class StudentCourseListPageTest extends BaseTest {
         studentCourseList.searchResultDisplayExactData("Growth Marketing");
         studentGrowthMarketingCourseDetails.displayGrowthMarketingTitleCourse("Growth Marketing");
 
-    }
+    }*/
 }

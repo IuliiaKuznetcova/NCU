@@ -6,17 +6,20 @@ import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 
 import java.time.Duration;
+
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
 
-
 public class StudentHomePage {
+
+
+    private SelenideElement coursesButton = $x("//*[@id=\"home_header4\"]/header/div/div/div[1]/a[2]/span");
     private SelenideElement professorSpotlightTittle = $x("(//span[normalize-space()='Professor spotlight'])[1]");
     private SelenideElement studentAvatar = $x("//*[@id=\"home_header4\"]/header/div/div/div[2]/button/div/img");
     private SelenideElement signOutStudentButton = $x("(//a[@role='menuitem'])[2]");
-    private SelenideElement coursesButton = $x("//*[@id=\"home_header4\"]/header/div/div/div[1]/a[2]/span");
-    private SelenideElement coursesLIstButton = $x("//*[@id=\"home_header4\"]/header/div/div/div[1]/div/div/div/a/span[1]");
-    private SelenideElement scroll = $x(" //*[@id=\"home-footer\"]/section/div/div[3]/div[1]/small");
+    private SelenideElement professorDirectoryButton = $x("(//span[normalize-space()='Professors'])[1]");
+    private SelenideElement coursesLIstButton = $x("//*[@id=\"home_header4\"]/header/div/div/div[1]/div/div/div/a");
+
     HederPage hederPage = new HederPage();
 
     @Step("Display title professor Spotlight отображение заголовка")
@@ -33,14 +36,13 @@ public class StudentHomePage {
     }
 
     @Step("Go to Courses Page  Переход к странице Courses")
-    public void goToCoursesPage() {
+    public void goToCoursesPage() throws InterruptedException {
         coursesButton.click();
+        coursesButton.shouldBe(visible, Duration.ofSeconds(10));
+        Thread.sleep(1000);
         coursesLIstButton.click();
-        //coursesLIstButton.shouldBe(visible, Duration.ofSeconds(10));
+        Thread.sleep(1000);
+        // coursesLIstButton.shouldBe(visible, Duration.ofSeconds(10));
     }
 
-    @Step("Scroll page to element 2023NoCode Проскролить страницу до элемента 2023NoCode")
-    public void scrollPageToElement2023NoCode(){
-        scroll.scrollIntoView(false);
-    }
 }
