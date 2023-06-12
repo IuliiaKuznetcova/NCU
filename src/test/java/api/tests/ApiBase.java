@@ -32,7 +32,7 @@ public class ApiBase {
         Configuration.browserCapabilities = new ChromeOptions().addArguments("-remote-allow-origins=*");
     }
 
-    @BeforeMethod
+/*    @BeforeMethod
     public void successfulCreateUserApiAndUi() {
         ValidUserCredentials requestBody = ValidUserCredentials.builder()
                 .full_name(fullName)
@@ -41,7 +41,7 @@ public class ApiBase {
                 .generate_magic_link(false)
                 .build();
         postRequest(endpoint, 201, requestBody);
-    }
+    }*/
 
 
     static RequestSpecification specification = new RequestSpecBuilder() {
